@@ -15,4 +15,4 @@
 **1.8** Глоссарий и поиск по курсу  
 
 
-[1_1]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/1.1%20Create%20Table.ipynb
+[1_1]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/Part%201/1.1%20Create%20Table.ipynb
