@@ -6,7 +6,13 @@
   - Добавление и удаление строк  
   - Очистка от дубликатов  
 	
-**1.2** Выборка данных  
+**1.2** [Выборка данных][1_2]  
+  - CSV > SQL
+  - `BETWEEN`
+  - `LIKE`
+  - `ORDER`
+  - `IF()`
+  
 **1.3** Запросы, групповые операции  
 **1.4** Вложенные запросы  
 **1.5** Запросы корректировки данных  
@@ -16,3 +22,4 @@
 
 
 [1_1]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/Part%201/1.1%20Create%20Table.ipynb
+[1_2]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/Part%201/1.2%20Data%20Sampling.ipynb
