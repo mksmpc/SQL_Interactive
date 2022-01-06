@@ -1,1 +1,5 @@
 .ipynb_checkpoints/
+.test/
+.idea/
+__pycache__/
+.pytest_cache/
