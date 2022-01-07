@@ -8,7 +8,7 @@ import sqlalchemy.engine
 __engine__: sqlalchemy.engine.Engine = None
 
 
-def setEngine(engine):
+def setEngine(engine: sqlalchemy.engine.Engine):
     global __engine__
     __engine__ = engine
 
@@ -49,6 +49,15 @@ class Table:
     """
 
     def __init__(self, db_name: str, path: str, schema_path: str = None, engine: sqlalchemy.engine.Engine = None):
+        """
+        Create object will provide easy work with resettable table
+        Note: Table will dropped if schema_path will been passed
+
+        :param db_name: desired DB's table name
+        :param path: path to CSV file, from which table will filled
+        :param schema_path: path to CSV file, from which table schema will created
+        :param engine: instance of sqlalchemy.engine
+        """
         global __engine__
 
         if engine:
