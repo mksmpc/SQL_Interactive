@@ -77,7 +77,8 @@ class Table:
         """
         Erase all data from DB_table
         """
-        __engine__.execute(f'TRUNCATE TABLE {self.__name__}')
+        __engine__.execute(f'DELETE FROM {self.__name__}')
+        __engine__.execute('VACUUM')
 
     def reset(self):
         """
@@ -141,14 +142,11 @@ class Table:
         return parametersQuery
 
     def __createTable__(self):
-        query = f'''          
-            DROP TABLE IF EXISTS {self.__name__};
-
-            CREATE TABLE IF NOT EXISTS {self.__name__} (
-            {self.__schema__}
-                    );
-                '''
-        __engine__.execute(query)
+        dropStatement = f'DROP TABLE IF EXISTS {self.__name__}'
+        createStatement = f'CREATE TABLE IF NOT EXISTS {self.__name__} ({self.__schema__});'
+        
+        __engine__.execute(dropStatement)
+        __engine__.execute(createStatement)
 
     def __readCSV__(self):
         return pd.read_csv(self.__path__)
