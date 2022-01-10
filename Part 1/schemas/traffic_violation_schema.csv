@@ -1,0 +1,4 @@
+name,params
+violation_id,"INTEGER PRIMARY KEY"
+violation,"VARCHAR(50)"
+sum_fine,"NUMERIC(8, 2)"
