@@ -22,7 +22,7 @@ def fromOther(other: 'Table', newPath) -> 'Table':
     :return: new Table instance
     """
     other.save(newPath)
-    return Table(other.__name__, newPath, other.__schema_path__)
+    return Table(other.__name__, newPath)
 
 
 def CSVfromDB(tableName: str, newPath) -> 'Table':
