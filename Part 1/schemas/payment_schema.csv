@@ -1,0 +1,7 @@
+name,params
+payment_id,"INTEGER PRIMARY KEY"
+name,"VARCHAR(30)"
+number_plate,"VARCHAR(6)"
+violation,"VARCHAR(50)"
+date_violation,"DATЕ"
+date_payment,"DATЕ"
