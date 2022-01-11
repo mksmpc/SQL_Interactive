@@ -78,7 +78,6 @@ class Table:
         Erase all data from DB_table
         """
         __engine__.execute(f'DELETE FROM {self.__name__}')
-        __engine__.execute('VACUUM')
 
     def reset(self):
         """
