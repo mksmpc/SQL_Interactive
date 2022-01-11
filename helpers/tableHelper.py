@@ -25,7 +25,7 @@ def fromOther(other: 'Table', newPath) -> 'Table':
     return Table(other.__name__, newPath, other.__schema_path__)
 
 
-def fromDB(tableName: str, newPath) -> 'Table':
+def CSVfromDB(tableName: str, newPath) -> 'Table':
     """
     Creates CSV file from exist DB's table
 
@@ -43,6 +43,20 @@ def __getTableData__(tableName):
     return data
 
 
+def __extractSchemaParameters__(schema_path):
+    schema = pd.read_csv(schema_path)
+    parameters = []
+    for index, row in schema.iterrows():
+        end = ','
+        if index == len(schema) - 1:
+            end = ''
+        param = row['name'] + ' ' + row['params'] + end
+        parameters.append(param)
+
+    parametersQuery = '\n'.join(parameters)
+    return parametersQuery
+
+
 class Table:
     """
     Helps work with educational tables
@@ -50,7 +64,7 @@ class Table:
 
     def __init__(self, db_name: str, path: str, schema_path: str = None, engine: sqlalchemy.engine.Engine = None):
         """
-        Create object will provide easy work with resettable table
+        Creates object that will provide easy work with resettable table
         Note: Table will dropped if schema_path will been passed
 
         :param db_name: desired DB's table name
@@ -70,8 +84,21 @@ class Table:
         self.__path__ = path
 
         if schema_path:
-            self.__schema_path__ = schema_path
-            self.__initTable__()
+            self.createTable(schema_path)
+            self.reset()
+
+    def createTable(self, schema_path):
+        """
+        Creates table in DB based on passed schema
+        
+        :param schema_path: path to CSV that contains schema parameters
+        """
+        schema = __extractSchemaParameters__(schema_path)
+        dropStatement = f'DROP TABLE IF EXISTS {self.__name__}'
+        createStatement = f'CREATE TABLE IF NOT EXISTS {self.__name__} ({schema});'
+        
+        __engine__.execute(dropStatement)
+        __engine__.execute(createStatement)
 
     def clear(self):
         """
@@ -120,32 +147,6 @@ class Table:
             data = pd.DataFrame(values, **params)
 
         data.to_sql(self.__name__, con=__engine__, index=False, if_exists='append', method='multi')
-
-    def __initTable__(self):
-        self.__schema__ = self.__extractSchemaParameters__()
-        self.__createTable__()
-        data = self.__readCSV__()
-        self.add(data)
-
-    def __extractSchemaParameters__(self):
-        schema = pd.read_csv(self.__schema_path__)
-        parameters = []
-        for index, row in schema.iterrows():
-            end = ','
-            if index == len(schema) - 1:
-                end = ''
-            param = row['name'] + ' ' + row['params'] + end
-            parameters.append(param)
-
-        parametersQuery = '\n'.join(parameters)
-        return parametersQuery
-
-    def __createTable__(self):
-        dropStatement = f'DROP TABLE IF EXISTS {self.__name__}'
-        createStatement = f'CREATE TABLE IF NOT EXISTS {self.__name__} ({self.__schema__});'
-        
-        __engine__.execute(dropStatement)
-        __engine__.execute(createStatement)
 
     def __readCSV__(self):
         return pd.read_csv(self.__path__)
