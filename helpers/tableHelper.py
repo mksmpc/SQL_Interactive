@@ -25,14 +25,18 @@ def fromOther(other: 'Table', newPath) -> 'Table':
     return Table(other.__name__, newPath)
 
 
-def CSVfromDB(tableName: str, newPath) -> 'Table':
+def CSVfromDB(tableName: str, newPath = None) -> 'Table':
     """
     Creates CSV file from exist DB's table
 
     :param tableName: exist DB's table name
     :param newPath: write table into this file (.CSV)
+    if empty - creates file in 'tables/[tableName].csv'
     :return: new Table instance
     """
+    if not newPath:
+        newPath = f'tables/{tableName}.csv'
+    
     newTable = Table(tableName, newPath)
     newTable.save()
     return newTable
@@ -122,6 +126,8 @@ class Table:
         """
         if not path:
             path = self.__path__
+        elif not path.endswith('.csv'):
+            path += '.csv'
 
         data = __getTableData__(self.__name__)
         data.to_csv(path, index=False)
