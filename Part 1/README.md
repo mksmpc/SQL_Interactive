@@ -7,7 +7,7 @@
 **1.5** [Запросы корректировки данных][1_5] : `CREATE`, `INSERT`, `UPDATE`, `DELETE`, `CREATE AS SELECT`  
 **1.6** [Таблица "Командировки", запросы на выборку][1_6] `LIMIT`, `DATEDIFF()`, `MONTH()`, `MONTHNAME()`  
 **1.7** [Таблица "Нарушения ПДД", запросы корректировки][1_7]  
-**1.8** Глоссарий и поиск по курсу  
+**1.8** [Глоссарий и поиск по курсу][1_8]  
 
 
 [1_1]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/Part%201/1.1%20Create%20Table.ipynb
@@ -17,3 +17,4 @@
 [1_5]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/Part%201/1.5%20Modify%20Queries.ipynb
 [1_6]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/Part%201/1.6%20Trip_Table%20Selection%20Queries.ipynb
 [1_7]: https://nbviewer.org/github/mksmpc/SQL_Interactive/blob/main/Part%201/1.7%20Fine_Table%20Modify%20Queries.ipynb
+[1_8]: https://stepik.org/lesson/583183/step/1?auth=login&unit=577913
