@@ -66,7 +66,7 @@ class Table:
     Helps work with educational tables
     """
 
-    def __init__(self, db_name: str, path: str, schema_path: str = None, engine: sqlalchemy.engine.Engine = None):
+    def __init__(self, db_name: str, path: str = None, schema_path: str = None, engine: sqlalchemy.engine.Engine = None):
         """
         Creates object that will provide easy work with resettable table
         Note: Table will dropped if schema_path will been passed
@@ -79,10 +79,13 @@ class Table:
         global __engine__
 
         if engine:
-            __engine__ = engine
+            setEngine(engine)
 
         if __engine__ is None:
             raise ValueError('Engine is not assigned. Pass the engine= argument')
+            
+        if not path:
+            path = f'tables/{db_name}.csv'
 
         self.__name__ = db_name
         self.__path__ = path
@@ -163,5 +166,6 @@ class Table:
             result += f'{attribute} = {value}\n'
 
         data = __getTableData__(self.__name__)
+        result += 'Table in DataBase:\n'
         result += data.to_string(index=False)
         return result
