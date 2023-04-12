@@ -18,7 +18,7 @@
 ### 2. Создать экземпляр таблицы:  
 
 >     tableHelper.Table(db_name: str, path: str, schema_path: str = None, engine: sqlalchemy.engine.base.Engine = None)
->        Create object will provide easy work with resettable table
+>        Created object will provide easy work with resettable table
 >        Note: Table will dropped if schema_path will been passed
 >          
 >        :param db_name: desired DB's table name
